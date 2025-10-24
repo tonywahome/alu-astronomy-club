@@ -1,4 +1,4 @@
-// File: C:\Users\LENOVO\Cloned repos\aah_1\apps\web\src\app\page.tsx
+// File: c:\Users\LENOVO\Cloned repos\aah_1\alu-astronomy-club\apps\web\src\app\page.tsx
 import * as entry from '../../../src/app/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

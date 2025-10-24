@@ -1,4 +1,4 @@
-// File: C:\Users\LENOVO\Cloned repos\aah_1\apps\web\src\app\layout.tsx
+// File: c:\Users\LENOVO\Cloned repos\aah_1\alu-astronomy-club\apps\web\src\app\layout.tsx
 import * as entry from '../../../src/app/layout.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

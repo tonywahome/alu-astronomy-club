@@ -172,11 +172,7 @@ export default function ApplyPage() {
                   placeholder="Your name"
                   className="w-full px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-[#66fcf1] focus:border-transparent"
                 />
-                {errors.fullName && (
-                  <p className="text-red-400 text-sm mt-1">
-                    {errors.fullName.message?.toString()}
-                  </p>
-                )}
+                {/* validation errors hidden in UI per request */}
               </div>
 
               {/* Email */}
@@ -190,11 +186,7 @@ export default function ApplyPage() {
                   placeholder="your.email@alu.edu"
                   className="w-full px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-[#66fcf1] focus:border-transparent"
                 />
-                {errors.email && (
-                  <p className="text-red-400 text-sm mt-1">
-                    {errors.email.message?.toString()}
-                  </p>
-                )}
+                {/* validation errors hidden in UI per request */}
               </div>
 
               {/* Phone */}
@@ -234,11 +226,7 @@ export default function ApplyPage() {
                   rows={4}
                   className="w-full px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-[#66fcf1] focus:border-transparent resize-none"
                 />
-                {errors.reason && (
-                  <p className="text-red-400 text-sm mt-1">
-                    {errors.reason.message?.toString()}
-                  </p>
-                )}
+                {/* validation errors hidden in UI per request */}
               </div>
 
               {/* Skills */}
@@ -295,11 +283,7 @@ export default function ApplyPage() {
                   the club's terms. *
                 </label>
               </div>
-              {errors.consent && (
-                <p className="text-red-400 text-sm">
-                  {errors.consent.message?.toString()}
-                </p>
-              )}
+              {/* validation errors hidden in UI per request */}
 
               {/* Submit Button */}
               <motion.button

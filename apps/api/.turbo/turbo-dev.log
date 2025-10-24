@@ -1,0 +1,6 @@
+
+> @alu/api@1.0.0 dev
+> tsx watch src/index.ts
+
+✨ ALU Astronomy API running on http://localhost:3001
+^C^C

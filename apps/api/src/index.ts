@@ -2,6 +2,132 @@ import express from "express";
 import cors from "cors";
 import helmet from "helmet";
 import rateLimit from "express-rate-limit";
+import multer from "multer";
+import * as admin from "firebase-admin";
+import * as functions from "firebase-functions";
+import { ApplicationSchema } from "@alu/types";
+import { z } from "zod";
+
+// Initialize Firebase Admin (works both locally with GOOGLE_APPLICATION_CREDENTIALS
+// set and in Cloud Functions environment where credentials are provided)
+if (!admin.apps.length) {
+  admin.initializeApp();
+}
+
+const db = admin.firestore();
+const bucket = admin.storage().bucket();
+
+const app = express();
+
+// Middleware
+app.use(cors());
+app.use(helmet());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.set("trust proxy", true);
+app.use(
+  rateLimit({
+    windowMs: 60 * 1000, // 1 minute
+    max: 60,
+  })
+);
+
+// Multer memory storage for small CV files
+const upload = multer({
+  storage: multer.memoryStorage(),
+  limits: { fileSize: 5 * 1024 * 1024 }, // 5MB
+  fileFilter: (_req, file, cb) => {
+    const allowed = [
+      "application/pdf",
+      "application/msword",
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    ];
+    if (allowed.includes(file.mimetype)) cb(null, true);
+    else cb(new Error("Unsupported file type"), false);
+  },
+});
+
+// Helper to coerce form values into expected shapes
+function coerceBody(body: Record<string, any>) {
+  return {
+    fullName: body.fullName,
+    email: body.email,
+    phone: body.phone || undefined,
+    department: body.department || undefined,
+    reason: body.reason,
+    skills: body.skills || undefined,
+    consent:
+      body.consent === true ||
+      body.consent === "true" ||
+      body.consent === "on" ||
+      body.consent === "1",
+  };
+}
+
+app.post(
+  "/apply",
+  upload.single("cv"),
+  async (req: express.Request, res: express.Response) => {
+    try {
+      const incoming = coerceBody(req.body || {});
+
+      // Validate main fields server-side using the shared schema
+      const parsed = ApplicationSchema.parse(incoming);
+
+      // If file present, upload to Firebase Storage
+      let cvPath: string | null = null;
+      if (req.file) {
+        const file = req.file;
+        const safeName = file.originalname.replace(/[^a-zA-Z0-9._-]/g, "_");
+        const dest = `applications/${Date.now()}_${safeName}`;
+        const fileRef = bucket.file(dest);
+
+        await fileRef.save(file.buffer, {
+          metadata: { contentType: file.mimetype },
+        });
+
+        cvPath = dest;
+      }
+
+      const docRef = await db.collection("applications").add({
+        ...parsed,
+        cvPath,
+        createdAt: admin.firestore.FieldValue.serverTimestamp(),
+      });
+
+      return res
+        .status(200)
+        .json({ id: docRef.id, message: "Application received" });
+    } catch (err) {
+      if (err instanceof z.ZodError) {
+        return res.status(400).json({ error: err.errors });
+      }
+      console.error(err);
+      return res
+        .status(500)
+        .json({ error: (err as Error).message || "Internal error" });
+    }
+  }
+);
+
+// Export express app as default for local usage and tests
+export default app;
+
+// Export a Firebase HTTPS function named `api` so this file can be deployed to Cloud Functions
+export const api = functions.https.onRequest(app);
+
+// If running standalone (not as a Cloud Function), start HTTP server
+if (require.main === module) {
+  const PORT = process.env.PORT || 4000;
+  app.listen(PORT, () =>
+    console.log(`API listening on http://localhost:${PORT}`)
+  );
+}
+import express from "express";
+import cors from "cors";
+import helmet from "helmet";
+import rateLimit from "express-rate-limit";
 import dotenv from "dotenv";
 
 dotenv.config();

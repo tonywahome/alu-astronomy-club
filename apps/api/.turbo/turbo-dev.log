@@ -3,4 +3,37 @@
 > tsx watch src/index.ts
 
 ✨ ALU Astronomy API running on http://localhost:3001
-^C^C
+6:52:03 PM [tsx] change in ./src\index.ts Restarting...
+
+node:internal/modules/run_main:123
+    triggerUncaughtException(
+    ^
+Error: Transform failed with 2 errors:
+C:\Users\LENOVO\Cloned repos\aah_1\alu-astronomy-club\apps\api\src\index.ts:129:6: ERROR: The symbol "app" has already been declared
+C:\Users\LENOVO\Cloned repos\aah_1\alu-astronomy-club\apps\api\src\index.ts:255:7: ERROR: Multiple exports with the same name "default"
+    at failureErrorWithLog (C:\Users\LENOVO\Cloned repos\aah_1\alu-astronomy-club\apps\api\node_modules\esbuild\lib\main.js:1467:15)
+    at C:\Users\LENOVO\Cloned repos\aah_1\alu-astronomy-club\apps\api\node_modules\esbuild\lib\main.js:736:50
+    at responseCallbacks.<computed> (C:\Users\LENOVO\Cloned repos\aah_1\alu-astronomy-club\apps\api\node_modules\esbuild\lib\main.js:603:9)
+    at handleIncomingPacket (C:\Users\LENOVO\Cloned repos\aah_1\alu-astronomy-club\apps\api\node_modules\esbuild\lib\main.js:658:12)
+    at Socket.readFromStdout (C:\Users\LENOVO\Cloned repos\aah_1\alu-astronomy-club\apps\api\node_modules\esbuild\lib\main.js:581:7)
+    at Socket.emit (node:events:524:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at Pipe.onStreamRead (node:internal/stream_base_commons:191:23) {
+  name: 'TransformError'
+}
+
+Node.js v20.19.0
+c6:54:50 PM [tsx] change in ./src\index.ts Rerunning...
+
+node:internal/modules/run_main:123
+    triggerUncaughtException(
+    ^
+Error: Transform failed with 2 errors:
+C:\Users\LENOVO\Cloned repos\aah_1\alu-astronomy-club\apps\api\src\index.ts:135:6: ERROR: The symbol "app" has already been declared
+C:\Users\LENOVO\Cloned repos\aah_1\alu-astronomy-club\apps\api\src\index.ts:261:7: ERROR: Multiple exports with the same name "default"
+    at failureErrorWithLog (C:\Users\LENOVO\Cloned repos\aah_1\alu-astronomy-club\apps\api\node_modules\esbuild\lib\main.js:1467:15)
+    at C:\Users\LENOVO\Cloned repos\aah_1\alu-astronomy-club\apps\api\node_modules\esbuild\lib\main.js:736:50
+    at responseCallbacks.<computed> (C:\Users\LENOVO\Cloned repos\aah_1\alu-astronomy-club\apps\api\node_modules\esbuild\lib\main.js:603:9)
+    at handleIncomingPacket (C:\Users\LENOVO\Cloned repos\aah_1\alu-astronomy-club\apps\api\node_modules\esbuild\lib\main.js:658:12)

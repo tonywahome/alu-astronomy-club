@@ -1,0 +1,31 @@
+
+> @alu/web@1.0.0 build
+> next build
+
+  ▲ Next.js 14.2.33
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully
+   Linting and checking validity of types ...
+Failed to compile.
+
+./src/app/page.tsx:59:13
+Type error: Type '{ initial: { opacity: number; y: number; }; animate: { opacity: number; y: number; }; transition: { duration: number; }; }' is not assignable to type 'Variants'.
+  Property 'transition' is incompatible with index signature.
+    Type '{ duration: number; }' is not assignable to type 'Variant'.
+
+[0m [90m 57 |[39m           [33m<[39m[33mmotion[39m[33m.[39mh1[0m
+[0m [90m 58 |[39m             className[33m=[39m[32m"font-orbitron font-bold text-5xl sm:text-6xl lg:text-7xl mb-6 text-[#66fcf1]"[39m[0m
+[0m[31m[1m>[22m[39m[90m 59 |[39m             variants[33m=[39m{fadeInUp}[0m
+[0m [90m    |[39m             [31m[1m^[22m[39m[0m
+[0m [90m 60 |[39m           [33m>[39m[0m
+[0m [90m 61 |[39m             [33mExploring[39m [33mBeyond[39m the [33mHorizon[39m[0m
+[0m [90m 62 |[39m           [33m<[39m[33m/[39m[33mmotion[39m[33m.[39mh1[33m>[39m[0m
+Next.js build worker exited with code: 1 and signal: null
+npm error Lifecycle script `build` failed with error:
+npm error code 1
+npm error path C:\Users\LENOVO\Cloned repos\aah_1\apps\web
+npm error workspace @alu/web@1.0.0
+npm error location C:\Users\LENOVO\Cloned repos\aah_1\apps\web
+npm error command failed
+npm error command C:\WINDOWS\system32\cmd.exe /d /s /c next build

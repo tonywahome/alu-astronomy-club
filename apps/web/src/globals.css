@@ -1,0 +1,94 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* Custom color variables for space theme */
+  :root {
+    --color-space-black: #0b0c10;
+    --color-navy: #1f2833;
+    --color-teal: #45a29e;
+    --color-cyan-glow: #66fcf1;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-[#0b0c10] text-white;
+    /* Primary body font: Alumni sans pinstripe thin
+       - Provide local files under /public/fonts and uncomment @font-face below
+       - Fallback to system sans-serif if the font isn't available */
+    font-family: "Alumni Sans Pinstripe Thin", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    /* Heading font: Smooch sans Semi Bold
+       - Provide local files under /public/fonts and uncomment @font-face below
+       - Fallback to a rounded/system sans */
+    font-family: "Smooch Sans Semi Bold", "Smooch Sans", ui-rounded, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+}
+
+/*
+  Optional local @font-face declarations (example). To self-host fonts:
+  1. Place font files at apps/web/public/fonts/
+  2. Uncomment and update the src paths / font-family names below to match the files.
+
+@font-face {
+  font-family: 'Smooch Sans Semi Bold';
+  src: url('/fonts/smooch-sans-semi-bold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Alumni Sans Pinstripe Thin';
+  src: url('/fonts/alumni-sans-pinstripe-thin.woff2') format('woff2');
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+*/
+
+@layer components {
+  /* Glow effect utility */
+  .glow {
+    @apply text-[#66fcf1] drop-shadow-lg;
+  }
+
+  .glow-hover {
+    @apply hover:text-[#66fcf1] hover:drop-shadow-lg transition-all duration-300;
+  }
+
+  /* Button variants */
+  .btn-primary {
+    @apply px-6 py-3 rounded-2xl bg-[#45a29e] text-[#0b0c10] font-bold hover:bg-[#66fcf1] hover:text-[#0b0c10] transition-all duration-300;
+  }
+
+  .btn-secondary {
+    @apply px-6 py-3 rounded-2xl border-2 border-[#66fcf1] text-[#66fcf1] font-bold hover:bg-[#66fcf1] hover:text-[#0b0c10] transition-all duration-300;
+  }
+
+  /* Glass morphism effect */
+  .glass {
+    @apply bg-white/10 backdrop-blur-md border border-white/20 rounded-xl;
+  }
+
+  /* Parallax and animation fallbacks */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
